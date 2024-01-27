@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { View, StyleSheet, TouchableOpacity } from "react-native";
 import { Text } from "react-native-paper";
-import Background from "../components/Layouts/Background";
+import Background from "../components/Layouts/BackGround";
 import Logo from "../components/Logo";
 import Header from "../components/Layouts/Header";
 import Button from "../components/Button";
@@ -11,6 +11,7 @@ import { theme } from "../Theme/Theme";
 import { emailValidator } from "../helpers/emailValidator";
 import { passwordValidator } from "../helpers/passwordValidator";
 import { nameValidator } from "../helpers/nameValidator";
+import { SD_LocalStorage } from "../utility/SD";
 
 export default function RegisterScreen({ navigation }) {
   const [name, setName] = useState({ value: "", error: "" });
@@ -25,6 +26,14 @@ export default function RegisterScreen({ navigation }) {
       setName({ ...name, error: nameError });
       setEmail({ ...email, error: emailError });
       setPassword({ ...password, error: passwordError });
+      localStorage.setItem(
+        SD_LocalStorage.SetRegister,
+        JSON.stringify({
+          name,
+          email,
+          password,
+        })
+      );
       return;
     }
     navigation.reset({

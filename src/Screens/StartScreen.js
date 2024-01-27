@@ -1,5 +1,5 @@
 import React from "react";
-import Background from "../components/Layouts/Background";
+import Background from "../components/Layouts/BackGround";
 import Logo from "../components/Logo";
 import Header from "../components/Layouts/Header";
 import Button from "../components/Button";

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { TouchableOpacity, StyleSheet, View } from "react-native";
 import { Text } from "react-native-paper";
-import Background from "../components/Layouts/Background";
+import Background from "../components/Layouts/BackGround";
 import Logo from "../components/Logo";
 import Header from "../components/Layouts/Header";
 import Button from "../components/Button";
@@ -10,6 +10,7 @@ import BackButton from "../components/Layouts/BackButton";
 import { theme } from "../Theme/Theme";
 import { emailValidator } from "../helpers/emailValidator";
 import { passwordValidator } from "../helpers/passwordValidator";
+import { SD_LocalStorage } from "../utility/SD";
 
 export default function LoginScreen({ navigation }) {
   const [email, setEmail] = useState({ value: "", error: "" });
@@ -23,10 +24,18 @@ export default function LoginScreen({ navigation }) {
       setPassword({ ...password, error: passwordError });
       return;
     }
-    navigation.reset({
-      index: 0,
-      routes: [{ name: "Dashboard" }],
-    });
+    if (localStorage.getItem(SD_LocalStorage.SetRegister)) {
+      const registerData = JSON.parse(
+        localStorage.getItem(SD_LocalStorage.SetRegister)
+      );
+      if (email === registerData.email && password === registerData.password) {
+        navigation.reset({
+          index: 0,
+          routes: [{ name: "Dashboard" }],
+        });
+      }
+    }
+    alert("Invalid Login Credential!!!");
   };
 
   return (
@@ -55,12 +64,6 @@ export default function LoginScreen({ navigation }) {
         errorText={password.error}
         secureTextEntry
       />
-      <View style={styles.forgotPassword}>
-        <TouchableOpacity
-          onPress={() => navigation.navigate("ResetPasswordScreen")}>
-          <Text style={styles.forgot}>Forgot your password ?</Text>
-        </TouchableOpacity>
-      </View>
       <Button mode='contained' onPress={onLoginPressed}>
         Log in
       </Button>
@@ -68,7 +71,7 @@ export default function LoginScreen({ navigation }) {
         <Text>You do not have an account yet ?</Text>
       </View>
       <View style={styles.row}>
-        <TouchableOpacity onPress={() => navigation.replace("RegisterScreen")}>
+        <TouchableOpacity onPress={() => navigation.navigate("RegisterScreen")}>
           <Text style={styles.link}>Create !</Text>
         </TouchableOpacity>
       </View>
