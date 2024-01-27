@@ -2,17 +2,25 @@ import React, { useState } from "react";
 import { View, StyleSheet, TouchableOpacity } from "react-native";
 import { Text } from "react-native-paper";
 import { theme } from "../Theme";
-import { SD_LocalStorage } from "../utility/SD";
 import { emailValidator, nameValidator, passwordValidator } from "../helpers";
 import { BackButton, BackGround, Header } from "../components/Layouts";
 import { Button, Logo, TextInput } from "../components/Screens";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function RegisterScreen({ navigation }) {
   const [name, setName] = useState({ value: "", error: "" });
   const [email, setEmail] = useState({ value: "", error: "" });
   const [password, setPassword] = useState({ value: "", error: "" });
 
-  const onSignUpPressed = () => {
+  const storeData = async (value) => {
+    try {
+      await AsyncStorage.setItem("registerUser", value);
+    } catch (e) {
+      alert(e);
+    }
+  };
+
+  const onSignUpPressed = async () => {
     const nameError = nameValidator(name.value);
     const emailError = emailValidator(email.value);
     const passwordError = passwordValidator(password.value);
@@ -20,19 +28,20 @@ export default function RegisterScreen({ navigation }) {
       setName({ ...name, error: nameError });
       setEmail({ ...email, error: emailError });
       setPassword({ ...password, error: passwordError });
-      localStorage.setItem(
-        SD_LocalStorage.SetRegister,
-        JSON.stringify({
-          name,
-          email,
-          password,
-        })
-      );
       return;
     }
+
+    await storeData(
+      JSON.stringify({
+        name: name.value,
+        email: email.value,
+        password: password.value,
+      })
+    );
+    alert("Thanks for register!");
     navigation.reset({
       index: 0,
-      routes: [{ name: "Dashboard" }],
+      routes: [{ name: "LoginScreen" }],
     });
   };
 

@@ -1,4 +1,4 @@
-import { Provider } from "react-native-paper";
+import { Provider as PaperProvider } from "react-native-paper";
 import { NavigationContainer } from "@react-navigation/native";
 import { theme } from "./src/Theme";
 import { createDrawerNavigator } from "@react-navigation/drawer";
@@ -13,7 +13,7 @@ const Drawer = createDrawerNavigator();
 
 export default function App() {
   return (
-    <Provider theme={theme}>
+    <PaperProvider theme={theme}>
       <NavigationContainer>
         <Drawer.Navigator
           initialRouteName='StartScreen'
@@ -26,6 +26,6 @@ export default function App() {
           <Drawer.Screen name='Dashboard' component={Dashboard} />
         </Drawer.Navigator>
       </NavigationContainer>
-    </Provider>
+    </PaperProvider>
   );
 }
