@@ -1,20 +1,30 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { Provider } from "react-native-paper";
+import { theme } from "./src/Theme/Theme";
+import { createDrawerNavigator } from "@react-navigation/drawer";
+import {
+  Dashboard,
+  LoginScreen,
+  RegisterScreen,
+  StartScreen,
+} from "./src/Screens";
+
+const Drawer = createDrawerNavigator();
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <Provider theme={theme}>
+      <NavigationContainer>
+        <Drawer.Navigator
+          initialRouteName='StartScreen'
+          screenOptions={{
+            headerShown: false,
+          }}>
+          <Drawer.Screen name='StartScreen' component={StartScreen} />
+          <Drawer.Screen name='LoginScreen' component={LoginScreen} />
+          <Drawer.Screen name='RegisterScreen' component={RegisterScreen} />
+          <Drawer.Screen name='Dashboard' component={Dashboard} />
+        </Drawer.Navigator>
+      </NavigationContainer>
+    </Provider>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
