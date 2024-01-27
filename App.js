@@ -1,6 +1,6 @@
 import { Provider } from "react-native-paper";
 import { NavigationContainer } from "@react-navigation/native";
-import { theme } from "./src/Theme/Theme";
+import { theme } from "./src/Theme";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import {
   Dashboard,

@@ -1,16 +1,11 @@
 import React, { useState } from "react";
 import { TouchableOpacity, StyleSheet, View } from "react-native";
 import { Text } from "react-native-paper";
-import Background from "../components/Layouts/BackGround";
-import Logo from "../components/Logo";
-import Header from "../components/Layouts/Header";
-import Button from "../components/Button";
-import TextInput from "../components/TextInput";
-import BackButton from "../components/Layouts/BackButton";
-import { theme } from "../Theme/Theme";
-import { emailValidator } from "../helpers/emailValidator";
-import { passwordValidator } from "../helpers/passwordValidator";
+import { theme } from "../Theme";
 import { SD_LocalStorage } from "../utility/SD";
+import { emailValidator, passwordValidator } from "../helpers";
+import { BackButton, BackGround, Header } from "../components/Layouts";
+import { Button, Logo, TextInput } from "../components/Screens";
 
 export default function LoginScreen({ navigation }) {
   const [email, setEmail] = useState({ value: "", error: "" });
@@ -39,7 +34,7 @@ export default function LoginScreen({ navigation }) {
   };
 
   return (
-    <Background>
+    <BackGround>
       <BackButton goBack={navigation.goBack} />
       <Logo />
       <Header>Hello.</Header>
@@ -75,7 +70,7 @@ export default function LoginScreen({ navigation }) {
           <Text style={styles.link}>Create !</Text>
         </TouchableOpacity>
       </View>
-    </Background>
+    </BackGround>
   );
 }
 

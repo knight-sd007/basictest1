@@ -1,13 +1,10 @@
 import React from "react";
-import Background from "../components/Layouts/BackGround";
-import Logo from "../components/Logo";
-import Header from "../components/Layouts/Header";
-import Button from "../components/Button";
-import Paragraph from "../components/Paragraph";
+import { BackGround, Header } from "../components/Layouts";
+import { Button, Logo, Paragraph } from "../components/Screens";
 
 export default function StartScreen({ navigation }) {
   return (
-    <Background>
+    <BackGround>
       <Logo />
       <Header>React Native - Expo - Login</Header>
       <Paragraph>React Native Expo Basic Test 1</Paragraph>
@@ -21,6 +18,6 @@ export default function StartScreen({ navigation }) {
         onPress={() => navigation.navigate("RegisterScreen")}>
         Create an account
       </Button>
-    </Background>
+    </BackGround>
   );
 }

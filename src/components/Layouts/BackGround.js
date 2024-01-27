@@ -4,7 +4,7 @@ import {
   StyleSheet,
   KeyboardAvoidingView,
 } from "react-native";
-import { theme } from "../../Theme/Theme";
+import { theme } from "../../Theme";
 
 export default function BackGround({ children }) {
   return (
@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
   background: {
     flex: 1,
     width: "100%",
-    backgroundColor: theme.colors.surface,
+    backgroundColor: theme.colors.yellow,
   },
   container: {
     flex: 1,

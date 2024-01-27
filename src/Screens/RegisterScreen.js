@@ -1,17 +1,11 @@
 import React, { useState } from "react";
 import { View, StyleSheet, TouchableOpacity } from "react-native";
 import { Text } from "react-native-paper";
-import Background from "../components/Layouts/BackGround";
-import Logo from "../components/Logo";
-import Header from "../components/Layouts/Header";
-import Button from "../components/Button";
-import TextInput from "../components/TextInput";
-import BackButton from "../components/Layouts/BackButton";
-import { theme } from "../Theme/Theme";
-import { emailValidator } from "../helpers/emailValidator";
-import { passwordValidator } from "../helpers/passwordValidator";
-import { nameValidator } from "../helpers/nameValidator";
+import { theme } from "../Theme";
 import { SD_LocalStorage } from "../utility/SD";
+import { emailValidator, nameValidator, passwordValidator } from "../helpers";
+import { BackButton, BackGround, Header } from "../components/Layouts";
+import { Button, Logo, TextInput } from "../components/Screens";
 
 export default function RegisterScreen({ navigation }) {
   const [name, setName] = useState({ value: "", error: "" });
@@ -43,7 +37,7 @@ export default function RegisterScreen({ navigation }) {
   };
 
   return (
-    <Background>
+    <BackGround>
       <BackButton goBack={navigation.goBack} />
       <Logo />
       <Header>Welcome.</Header>
@@ -86,11 +80,11 @@ export default function RegisterScreen({ navigation }) {
         <Text>I already have an account !</Text>
       </View>
       <View style={styles.row}>
-        <TouchableOpacity onPress={() => navigation.replace("LoginScreen")}>
+        <TouchableOpacity onPress={() => navigation.navigate("LoginScreen")}>
           <Text style={styles.link}>Log in</Text>
         </TouchableOpacity>
       </View>
-    </Background>
+    </BackGround>
   );
 }
 

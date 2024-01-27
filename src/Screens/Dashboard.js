@@ -1,13 +1,10 @@
 import React from "react";
-import Background from "../components/Layouts/BackGround";
-import Logo from "../components/Logo";
-import Header from "../components/Layouts/Header";
-import Paragraph from "../components/Paragraph";
-import Button from "../components/Button";
+import { BackGround, Header } from "../components/Layouts";
+import { Button, Logo, Paragraph } from "../components/Screens";
 
 export default function Dashboard({ navigation }) {
   return (
-    <Background>
+    <BackGround>
       <Logo />
       <Header>Welcome 💫</Header>
       <Paragraph>Congratulations you are logged in.</Paragraph>
@@ -21,6 +18,6 @@ export default function Dashboard({ navigation }) {
         }>
         Sign out
       </Button>
-    </Background>
+    </BackGround>
   );
 }
